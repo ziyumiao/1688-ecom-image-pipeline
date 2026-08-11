@@ -208,3 +208,16 @@ Generate 模式额外输出：
 ## API 安全
 
 只从 `CODESONLINE_IMAGE_API_KEY` 读取 CodesOnline 密钥。不得把密钥放入 Prompt、文件、日志或最终回复。没有密钥时只输出完整 Prompt 和配置说明，不声称已经出图。
+
+## 随包子技能：给 Agent 的自动安装入口
+
+本仓库的 `companion-skills/` 包含两个**可独立发现**的技能源码：`codesonline-image` 与 `ecom-details-image`。它们不能只留在本 Skill 的子目录中使用；要让 Codex 自动按触发条件发现，必须安装到本 Skill 所在的同级 skills 目录。
+
+开始任务时按此规则执行：
+
+1. 需要 CodesOnline 或通用电商图片模板时，先检查同级目录是否分别存在 `codesonline-image/SKILL.md`、`ecom-details-image/SKILL.md`。
+2. 若缺失且当前 Skill 内有 `companion-skills/`，运行本 Skill 的 `scripts/install_companion_skills.py`；它只复制缺失的两个技能，不覆盖已有安装，不复制任何真实 `.env`、密钥或生成结果。
+3. 安装后读取实际同级技能的 `SKILL.md`，再按其规则执行。不要把仓库内 `companion-skills/` 的源码误当作已安装技能。
+4. 若两个同级技能已存在，直接使用；不要重复安装或改写其本地配置。
+
+这个检查由 Agent 完成，同事不需要手动理解技能之间的调用关系。

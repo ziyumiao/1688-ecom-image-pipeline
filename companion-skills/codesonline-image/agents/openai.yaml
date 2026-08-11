@@ -1,0 +1,4 @@
+interface:
+  display_name: "CodesOnline 生图"
+  short_description: "调用 CodesOnline 图片接口生成、编辑并保存图片文件"
+  default_prompt: "使用 $codesonline-image 根据我的描述生成一张图片，并保存到当前工作目录。"

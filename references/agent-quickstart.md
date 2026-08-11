@@ -2,6 +2,16 @@
 
 本页给不熟悉 Agent 的同事使用。先照流程执行，再按项目事实替换占位内容。
 
+## 首次使用：让 Codex 自动看见全部三个技能
+
+安装本 Skill 后，Agent 需要图生图或电商模板时，应先自行检查同级 skills 目录是否已有 `codesonline-image` 与 `ecom-details-image`。若缺失，且本 Skill 内有 `companion-skills/`，应运行：
+
+```powershell
+python "<本技能目录>\scripts\install_companion_skills.py"
+```
+
+该脚本只安装缺失的同级技能；不会覆盖已安装技能，也不会携带真实 `.env`、API Key 或生成图片。安装完成后，Agent 再读取相应的 `SKILL.md`。同事只需安装主技能，无需手动拆分目录或记忆两个子技能的名称。
+
 ## 新手六步
 
 1. 阅读 `SKILL.md`，再阅读本页和与项目匹配的 reference。
