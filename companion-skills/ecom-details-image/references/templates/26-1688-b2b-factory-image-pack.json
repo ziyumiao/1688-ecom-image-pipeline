@@ -1,0 +1,74 @@
+{
+  "id": "1688-b2b-factory-image-pack",
+  "name": "1688 B2B工厂店主图与详情页图片包",
+  "keywords": ["1688", "阿里巴巴1688", "B2B", "工厂店", "源头工厂", "批发", "采购", "主图", "详情页", "图片包"],
+  "trigger_phrases": ["1688主图", "1688详情页", "1688图片包", "B2B工厂店", "工厂店主图", "工厂详情页", "批发采购图片", "源头工厂图片"],
+  "prompt_template": {
+    "type": "1688 B2B factory-store ecommerce image pack",
+    "product": "{product_description}",
+    "buyer": "{target_buyer_and_procurement_context}",
+    "verified_facts": "{verified_product_and_service_facts}",
+    "evidence_assets": "{available_product_factory_and_inspection_assets}",
+    "campaign_style_lock": "{campaign_style_lock}",
+    "main_image_rules": "square marketplace images; product-led composition; reserve platform-safe space; use only verified short copy and evidence",
+    "detail_page_rules": "mobile-first vertical e-commerce infographics; each screen resolves one procurement question with labeled evidence or a clearly marked placeholder",
+    "fact_safety": "Do not invent prices, MOQ, lead times, capacity, certifications, inspection results, customer logos, ratings, sales, or service commitments. Omit unknown facts or label them as placeholders for confirmation.",
+    "asset_integrity": "Preserve the supplied product's shape, color, material, markings, parts, quantity, and proportions. Use real supplied assets for product, production, and inspection claims whenever available.",
+    "negative_constraints": "no illustrative styling; no product-category-specific props or terminology unless supplied by the user; no fabricated text, logo, seal, certificate, data chart, or procurement claim"
+  },
+  "defaults": {
+    "main_image_ratio": "1:1",
+    "detail_page_ratio": "2:3",
+    "main_image_count": 5,
+    "detail_page_count": 8,
+    "main_image_product_coverage": "35-45% unless the supplied product needs a different verified presentation",
+    "whitespace": "45%+ for main images and 50%+ for detail pages",
+    "copy_policy": "Use short, readable placeholders only until the user confirms copy and factual claims.",
+    "evidence_policy": "Claims about product, factory, inspection, delivery, or service require user-supplied evidence; otherwise use an explicit placeholder or omit the claim."
+  },
+  "image_pack_structure": {
+    "main_images": [
+      {"id": "M01", "purpose": "product and procurement entry point", "question_answered": "What is being sourced and for which procurement context?", "required_inputs": ["product_description", "verified_core_value"], "layout": "product-led hero with a short verified headline placeholder and reserved platform-safe space"},
+      {"id": "M02", "purpose": "configuration or scope overview", "question_answered": "What is included, selectable, or within scope?", "required_inputs": ["verified_configuration_or_scope"], "layout": "clear labeled overview using only supplied product assets"},
+      {"id": "M03", "purpose": "material, construction, or process evidence", "question_answered": "What observable quality evidence supports the product?", "required_inputs": ["verified_material_or_process", "evidence_assets"], "layout": "real macro or process evidence with concise callouts"},
+      {"id": "M04", "purpose": "application or buyer-fit proof", "question_answered": "Where or by whom is the product used?", "required_inputs": ["verified_application_or_buyer_context"], "layout": "credible supplied application image or neutral contextual diagram"},
+      {"id": "M05", "purpose": "clean product verification image", "question_answered": "Can the buyer inspect the supplied item clearly?", "required_inputs": ["product_assets"], "layout": "clean white or neutral background, minimal copy, unobstructed product view"}
+    ],
+    "detail_pages": [
+      {"id": "D01", "purpose": "procurement overview", "question_answered": "What sourcing need does this product address?", "layout": "E-commerce infographic overview with verified headline, product, and 3-4 short evidence labels"},
+      {"id": "D02", "purpose": "product structure or materials", "question_answered": "What can be verified about construction or material?", "layout": "E-commerce infographic with supplied macro evidence and labeled callouts"},
+      {"id": "D03", "purpose": "features and buyer benefits", "question_answered": "Which product features matter to the buyer?", "layout": "two-column benefit infographic; each benefit tied to a verified feature"},
+      {"id": "D04", "purpose": "specification and compatibility", "question_answered": "What must be checked before ordering?", "layout": "open specification layout with confirmed fields only; unknown fields remain placeholders"},
+      {"id": "D05", "purpose": "application guidance", "question_answered": "How is the product used or deployed?", "layout": "numbered steps or scenario panels based only on confirmed usage information"},
+      {"id": "D06", "purpose": "production or service workflow", "question_answered": "What happens after inquiry or order confirmation?", "layout": "process diagram using user-confirmed steps only; leave unverified stages as placeholders"},
+      {"id": "D07", "purpose": "quality and delivery evidence", "question_answered": "What evidence exists for quality handling or fulfillment?", "layout": "evidence-first panel using supplied factory, inspection, packaging, or shipping assets; no fabricated badges"},
+      {"id": "D08", "purpose": "inquiry close", "question_answered": "What information should the buyer provide next?", "layout": "clean CTA panel with an inquiry checklist and confirmation placeholders, never unverified commercial terms"}
+    ]
+  },
+  "variants": {
+    "evidence-first": {
+      "description": "优先呈现实拍产品、材料、工艺、工厂或质检证据",
+      "overrides": {"visual_priority": "real evidence assets before decorative visuals", "copy_density": "minimal"}
+    },
+    "customization-inquiry": {
+      "description": "适用于需确认规格、文件、样品或服务边界的询盘路径",
+      "overrides": {"detail_emphasis": "confirmation checklist, supplied workflow evidence, and explicit placeholders for commercial terms"}
+    },
+    "ready-stock-procurement": {
+      "description": "适用于现货采购，但所有库存与交付信息必须由用户确认",
+      "overrides": {"detail_emphasis": "product scope, configuration verification, and inquiry requirements; do not assume availability or terms"}
+    }
+  },
+  "category_tips": {
+    "general": "Keep all category-specific specifications, safety statements, performance claims, and application claims tied to user-provided facts and assets.",
+    "industrial": "Prioritize model, material, dimensions, interface, operating context, and inspection evidence when confirmed.",
+    "consumer_goods": "Prioritize material, included items, care or use guidance, packaging scope, and real product detail when confirmed.",
+    "components": "Prioritize dimensions, compatibility conditions, tolerances, drawing references, and batch-identification evidence when confirmed."
+  },
+  "examples": [
+    "Create a 1688 B2B factory-store image pack for {product_description}. Use only {verified_product_and_service_facts} and {available_product_factory_and_inspection_assets}. Build M01-M05 and D01-D08 from the defined structure. Mark missing copy, specifications, commercial terms, and evidence as placeholders. No illustrative styling, fabricated claims, or product-category assumptions.",
+    "E-commerce infographic specification screen for {product_description}. Use a mobile-first two-column layout, supplied product image, and confirmed specification labels only. Unknown values appear as 「待确认」 placeholders. Product occupies 35%; whitespace 50%+. No fabricated data, seals, prices, MOQ, or delivery promises."
+  ],
+  "anti_ai_tips": "Use supplied product and evidence images as references. Keep labels short and proof-oriented. Do not generate pseudo-certificates, dense tables with invented values, artificial factory scenes presented as evidence, or extra product parts.",
+  "supports_image_reference": true
+}

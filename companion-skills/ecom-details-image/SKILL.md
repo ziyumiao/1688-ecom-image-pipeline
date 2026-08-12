@@ -44,8 +44,8 @@ python3 scripts/generate_image.py --env-file .env --prompt-file prompt.txt
 
 ## 核心流程
 
-1. 判断视觉任务类型和场景（见下方**场景模板系统**）。
-2. 从 `references/templates/` 匹配对应模板，读取 `prompt_template`、`variants`、`category_tips` 作为 Prompt 基础结构。
+1. 判断视觉任务类型和场景（见下方**场景模板系统**）。若请求涉及 1688、B2B 工厂店、批发采购、主图或详情页图片包，优先检索 `26-1688-b2b-factory-image-pack.json`；再按单张图片需求补充匹配其他模板。
+2. 从 `references/templates/` 匹配对应模板，读取 `prompt_template`、`variants`、`category_tips` 作为 Prompt 基础结构；使用 1688 B2B 模板时，同时读取其 `image_pack_structure`、`fact_safety` 与 `asset_integrity` 约束。
 3. 只收集会实质影响图片结果的缺失信息。
 4. 构建视觉简报。
 5. 如果任务包含多张图，先建立 **Campaign Style Lock**，锁定整套图的色板、冷暖调、字体、背景、光线、布局和图标风格。
@@ -175,7 +175,7 @@ Prompt 要足够具体，可以直接执行；也不要过度规定无关细节�
 
 ## 场景模板系统
 
-`references/templates/` 目录包含 25 个场景模板，每个模板提供 `prompt_template`、`variants`（风格变体）、`category_tips`（品类建议）、`examples` 和 `anti_ai_tips`。
+`references/templates/` 目录包含 26 个模板：25 个通用场景模板，以及 1 个优先用于 1688 B2B 工厂店主图与详情页图片包的模板。模板提供 `prompt_template`、`variants`（风格变体）、`category_tips`（品类建议）、`examples` 和 `anti_ai_tips`；1688 B2B 模板还提供 `image_pack_structure`、事实安全与素材完整性约束。
 
 ### 模板匹配表
 
@@ -206,8 +206,9 @@ Prompt 要足够具体，可以直接执行；也不要过度规定无关细节�
 | 设备模型, 界面, mockup, SaaS, APP | `23-device-mockup.json` |
 | 店铺, 门面, 空间, storefront, 实体店 | `24-storefront.json` |
 | 运动, 健身, sports, fitness | `25-sports-campaign.json` |
+| 1688, 阿里巴巴1688, B2B, 工厂店, 源头工厂, 批发采购, 1688主图, 1688详情页, 1688图片包 | `26-1688-b2b-factory-image-pack.json`（优先检索） |
 
-无匹配 → 默认 `01-hero-image.json`。**只读取匹配到的模板文件**，不要一次性加载全部。
+涉及 1688 / B2B 工厂店 / 批发采购，或同时请求主图与详情页时，先读取 `26-1688-b2b-factory-image-pack.json`，再按单屏视觉需求读取必要的补充模板。无匹配 → 默认 `01-hero-image.json`。**只读取匹配到的模板文件**，不要一次性加载全部。
 
 ### 模板使用方式
 
@@ -216,6 +217,7 @@ Prompt 要足够具体，可以直接执行；也不要过度规定无关细节�
 3. 用户指定风格变体 → 应用 `variants.<name>.overrides`。
 4. 已知产品品类 → 应用 `category_tips.<category>`。
 5. 简化：只保留有值的字段，输出简洁的自然语言 Prompt。
+6. 1688 B2B 图片包：按 `image_pack_structure` 组织 M01-M05 与 D01-D08；只使用用户确认的产品、工厂、质检和服务事实。价格、MOQ、交期、产能、认证、客户背书等未提供时省略或标为待确认，不得推断。
 
 ### 风格变体速查
 

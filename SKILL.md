@@ -89,9 +89,9 @@ description: Unified 1688 B2B ecommerce image workflow combining product facts, 
 
 优先复用已安装 `ecom-details-image` 的 `references/templates/`。只读取当前任务需要的模板，不一次性加载全部模板。
 
-处理键帽现货、键位图、热升华工艺、客户定制案例、阶梯报价或生产质检页面时，先完整阅读 [references/keycap-1688-image-template.md](references/keycap-1688-image-template.md)。用该模板拆分现货与定制事实、选择 M01–M05/D01–D04 页面结构，并执行开放式版式和物理一致性验收；模板中的字段是占位结构，不得替代当前用户确认的事实。
+处理 1688 B2B 工厂店的现货、定制、客户案例、阶梯报价、生产或质检页面时，先完整阅读 [references/keycap-1688-image-template.md](references/keycap-1688-image-template.md)。用该模板拆分采购路径与证据来源、选择 M01–M05/D01–D07 页面结构，并执行开放式版式和物理一致性验收；模板中的字段是占位结构，不得替代当前用户确认的事实。若已安装 `ecom-details-image`，再优先读取其 `references/templates/26-1688-b2b-factory-image-pack.json`，并只按当前单屏需求补充其他模板。
 
-不熟悉 Agent 的同事先阅读 [references/agent-quickstart.md](references/agent-quickstart.md)，按“新手六步”、决策表、交接模板和验收回报格式执行。`codesonline-image` 是外部图像生成的独立 companion skill；`ecom-details-image` 的模板为可选依赖，缺失时仍可使用本技能内置的页面职责和键帽模板。
+不熟悉 Agent 的同事先阅读 [references/agent-quickstart.md](references/agent-quickstart.md)，按“新手六步”、决策表、交接模板和验收回报格式执行。`codesonline-image` 是外部图像生成的独立 companion skill；`ecom-details-image` 的模板为可选依赖，缺失时仍可使用本技能内置的通用页面职责。
 
 常用映射：
 
